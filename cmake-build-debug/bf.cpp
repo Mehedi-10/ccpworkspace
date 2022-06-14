@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 #define fileh freopen("input.txt", "r", stdin),freopen("correctoutput.txt", "w", stdout);
 int main()
@@ -23,8 +24,11 @@ int main()
             }
             fans=max(sum,fans);
         }while (next_permutation(vc.begin(),vc.end()));
+
         cout<<fans<<endl;
 
     }
 
+
+    return 0;
 }

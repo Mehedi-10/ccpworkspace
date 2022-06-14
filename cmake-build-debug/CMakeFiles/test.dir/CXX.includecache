@@ -7,20 +7,6 @@
 #IncludeRegexTransform: 
 
 D:/cp/ccpworkspace/cmake-build-debug/test.cpp
-stdlib.h
--
-fstream
--
-iostream
--
-string
--
-sstream
--
-algorithm
--
-vector
--
-bitset
+bits/stdc++.h
 -
 
