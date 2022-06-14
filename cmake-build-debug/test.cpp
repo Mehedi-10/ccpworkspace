@@ -28,7 +28,7 @@ int main() {
         getans(out, vc1);
         getans(crout, vc2);
         int lim=max(vc1.size(),vc2.size());
-        int inp_startsfrom=1,inpsize=2,acsize=1;
+        int inp_startsfrom=1,inpsize=1,acsize=1;
         for (int i = 0; i <lim ; ++i) {
             if (vc1[i] != vc2[i]) {
                 string str;
@@ -36,7 +36,7 @@ int main() {
                     getline(in,str);
                     cout<<str<<endl;
                 }
-                for (int j = inp_startsfrom; j <i-1 ; ++j) {
+                for (int j = inp_startsfrom; j <=i ; ++j) {
                     for (int k = 0; k < inpsize; ++k) {
                         getline(in,str);
                     }

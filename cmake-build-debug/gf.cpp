@@ -16,15 +16,7 @@ int main() {
     int t = inp+2;
     cout <<t<< endl;
     while (t--) {
-        int n = inp, k = inp;
-        if (n & 1)
-            n++;
-        cout << n << " " << k << endl;
-        for (int i = 0; i < n; ++i) {
-            cout << inp << " ";
-        }
-        cout << endl;
-
+        cout<<inp<<" "<<inp<<" "<<inp<<" "<<inp<<endl;
     }
     return 0;
 }

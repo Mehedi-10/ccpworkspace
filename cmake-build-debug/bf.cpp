@@ -9,23 +9,25 @@ int main()
     long long t;
     cin >> t;
     while (t--) {
-        int n, k;
-        cin >> n >> k;
-        vector<int>vc(n);
-        for (auto &i : vc) {
-            cin>>i;
-        }
-        sort(vc.begin(),vc.end());
-        int fans=0;
-        do {
-            int sum=0;
-            for (int i = 0; i < n; i+=2) {
-                sum+=(vc[i]+vc[i+1])/k;
+        long long x, a, d, n;
+        cin >> x >> a >> d >> n;
+        n--;
+        if(x<=a)
+        {
+            cout<<a-x<<endl;
+            continue;
+        } else if(a+n*d<=x)
+        {
+            cout<<x-(a+n*d)<<endl;
+            continue;
+        } else
+        {
+            long long ans=INT_MAX;
+            for (int i = 0; i < n; ++i) {
+                ans=min(ans,abs(x-a+i*d));
             }
-            fans=max(sum,fans);
-        }while (next_permutation(vc.begin(),vc.end()));
-
-        cout<<fans<<endl;
+            cout<<ans<<endl;
+        }
 
     }
 
