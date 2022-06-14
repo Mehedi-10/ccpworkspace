@@ -15,17 +15,18 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
     long long x, a, d, n, t;
-    cin >> t;
-    while (t--) {
+
         cin >> x >> a >> d >> n;
         n--;
+        if(d<0)
+            a=a+n*d;
+        d=abs(d);
         if (x <= a)
             cout << a - x << endl;
         else if ((a + n * d) <= x)
             cout << (x - a) - n * d << endl;
         else
             cout << min(d - (x - a) % d, (x - a) % d) << endl;
-    }
 
     return 0;
 }
