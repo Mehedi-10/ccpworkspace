@@ -13,16 +13,18 @@ void getans(ifstream &x, vector<string> &vc) {
 }
 
 int main() {
-    system("g++ -o zgf gf.cpp");
-    system("zgf.exe");
 
-    system("g++ -o main main.cpp");
-    system("main.exe");
-
-    system("g++ -o zbf bf.cpp");
-    system("zbf.exe");
 
     try {
+        system("g++ -o zgf gf.cpp");
+        system("zgf.exe");
+
+        system("g++ -o main main.cpp");
+        system("main.exe");
+
+        system("g++ -o zbf bf.cpp");
+        system("zbf.exe");
+
         ifstream out("output.txt"), crout("correctoutput.txt"), in("input.txt");
         vector<string> vc1, vc2;
         getans(out, vc1);
