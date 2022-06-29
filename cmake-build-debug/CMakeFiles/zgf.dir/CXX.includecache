@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 D:/cp/ccpworkspace/cmake-build-debug/gf.cpp
-iostream
--
-random
+bits/stdc++.h
 -
 

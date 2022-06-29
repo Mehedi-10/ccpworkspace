@@ -11,9 +11,7 @@ void getans(ifstream &x, vector<string> &vc) {
     }
 
 }
-
-int main() {
-
+int main(int cnt=0) {
 
     try {
         system("g++ -o zgf gf.cpp");
@@ -30,7 +28,7 @@ int main() {
         getans(out, vc1);
         getans(crout, vc2);
         int lim=max(vc1.size(),vc2.size());
-        int inp_startsfrom=1,inpsize=1,acsize=1;
+        int inp_startsfrom=1,inpsize=2,acsize=1;
         for (int i = 0; i <lim ; ++i) {
             if (vc1[i] != vc2[i]) {
                 string str;
@@ -53,16 +51,21 @@ int main() {
                 }
                 cout<<"YOURS"<<endl;
                 cout<<vc1[i]<<endl;
+                cout<<endl;
 
                 return 0;
             }
         }
 
 
-
     } catch (const exception &ex) {
+
         cerr << ex.what() << endl;
+        return 0;
     }
+
+    if(cnt<3)
+    main(cnt+1);
 
     return 0;
 }
