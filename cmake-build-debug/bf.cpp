@@ -3,34 +3,39 @@
 using namespace std;
 #define fileh freopen("input.txt", "r", stdin),freopen("correctoutput.txt", "w", stdout);
 
+
 int main() {
     fileh;
-    ios_base::sync_with_stdio(false), cin.tie(nullptr);
     int t;
     cin >> t;
     while (t--) {
-        int n;
+        long long n, x, y;
         cin >> n;
-        vector<long long> vc(n);
-        set<long long >ss;
-        for (auto &i : vc) {
-            cin >> i;
-            ss.insert(i);
-        }
-        bool ok = 1;
+        vector<pair<long long, long long >> vc1;
 
-        for (int i = 0; i < n && ok; ++i) {
-            for (int j = i + 1; j < n && ok; ++j) {
-                for (int k = j+1; k <n && ok; ++k) {
-                 long long sum=vc[i]+vc[j]+vc[k];
-                 if(ss.find(sum)==ss.end())
-                     ok=0;
-                }
+        for (int i = 0; i < n; ++i) {
+            cin >> x >> y;
+            if (x > y)
+                swap(x, y);
+            vc1.push_back({x, y});
+        }
+        vector<int> vc(n);
+        iota(vc.begin(), vc.end(), 0);
+        long long ans = 0;
+        do {
+            long long sum = 0;
+            for (int i = 0; i < n; i += 2) {
+                sum += max({abs(vc1[vc[i]].first - vc1[vc[i + 1]].first),
+
+                            abs(vc1[vc[i]].first - vc1[vc[i + 1]].second),
+                            abs(vc1[vc[i]].second - vc1[vc[i + 1]].first),
+                            abs(vc1[vc[i]].second - vc1[vc[i + 1]].second)}
+                );
             }
-        }
-        cout << (!ok ? "NO" : "YES") << endl;
+            ans = max(ans, sum);
 
-
+        } while (next_permutation(vc1.begin(), vc1.end()));
+        cout << ans << endl;
     }
 
     return 0;

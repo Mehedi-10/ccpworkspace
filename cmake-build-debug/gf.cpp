@@ -5,13 +5,13 @@ using namespace std;
 #define inp dist6(rng)
 
 /**************************/
-#define low -7
+#define low 0
 #define high 7
-#define maxArraySize 11
-#define minArraySize 3
+#define maxArraySize  3
+#define minArraySize 1
 /*************************/
 
-vector<vector<int>> vc;
+vector<vector<pair<int,int>>> vc;
 
 int main() {
     ios_base::sync_with_stdio(false), cin.tie(nullptr);
@@ -24,14 +24,14 @@ int main() {
             std::uniform_int_distribution<int> dist6(i, j);
             for (int k = minArraySize; k <= maxArraySize; ++k) {
                 for (int xx = 0; xx < 7; ++xx) {
-                    vector<int> tmp;
-                    for (int l = 0; l < k; ++l) {
-                        tmp.emplace_back(inp);
+                    vector<pair<int,int>> tmp;
+                    for (int l = 0; l < 2*k; ++l) {
+                        tmp.emplace_back(inp,inp);
                     }
                     vc.emplace_back(tmp);
                     inge += tmp.size();
                     if (((inge * sizeof(int)) * 1e-6) > 2.5) {
-                        system("g++ -o comp largevalue.cpp");
+//                        system("g++ -o comp largevalue.cpp");
                         return 0;
                     }
 
@@ -47,9 +47,8 @@ int main() {
     for (auto &i : vc) {
         cout << i.size() << endl;
         for (auto &j : i) {
-            cout << j << " ";
+            cout << j.first << " "<<j.second<<endl;
         }
-        cout << endl;
     }
 
 
