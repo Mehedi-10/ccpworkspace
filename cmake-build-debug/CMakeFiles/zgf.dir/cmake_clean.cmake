@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/zgf.dir/gf.cpp.obj"
+  "CMakeFiles/zgf.dir/gf.cpp.obj.d"
   "libzgf.dll.a"
   "zgf.exe"
   "zgf.exe.manifest"

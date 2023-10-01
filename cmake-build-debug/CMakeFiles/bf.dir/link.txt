@@ -1,3 +1,0 @@
-"D:\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\bf.dir/objects.a
-D:\mingw64\bin\ar.exe cr CMakeFiles\bf.dir/objects.a @CMakeFiles\bf.dir\objects1.rsp
-D:\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\bf.dir/objects.a -Wl,--no-whole-archive  -o bf.exe -Wl,--out-implib,libbf.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\bf.dir\linklibs.rsp

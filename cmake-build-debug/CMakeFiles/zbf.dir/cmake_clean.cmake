@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/zbf.dir/bf.cpp.obj"
+  "CMakeFiles/zbf.dir/bf.cpp.obj.d"
   "libzbf.dll.a"
   "zbf.exe"
   "zbf.exe.manifest"
