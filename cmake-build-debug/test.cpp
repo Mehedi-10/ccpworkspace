@@ -6,36 +6,37 @@ using namespace std;
 int main(int cnt = 0) {
 
     try {
-        system("g++ -o zgf gf.cpp");
+        system("g++ -std=c++17 -o zgf gf.cpp");
         system("zgf.exe");
-        system("g++ -o main main.cpp");
+        system("g++ -std=c++17 -o main main.cpp");
 
         system("main.exe");
-        system("g++ -o zbf bf.cpp");
+        system("g++ -std=c++17 -o zbf bf.cpp");
         system("zbf.exe");
 
         ifstream out("output.txt"), crout("correctoutput.txt"), in("input.txt");
-        string str,str1,sss;
-        int x=0;
-        while (getline(crout,str))
-        {
-            getline(out,str1);
+        string str, str1, sss;
+        int x = 0;
+        while (getline(crout, str)) {
+            getline(out, str1);
             x++;
-            if(str!=str1)
-            {
-                cout<<"Not Identical Line "<<x<<endl;
-                if(have_tc)
-                    getline(in,sss);
+            if (str != str1) {
+                cout << "Not Identical Line " << x << endl;
+                if (have_tc)
+                    getline(in, sss);
 
                 /* taking input */
-                for (int i = 0; i < 2*x; ++i) {
-                    getline(in,sss);
+                for (int i = 0; i < x; ++i) {
+                    getline(in, sss);
                 }
-                cout<<sss<<endl;
-                getline(in,sss);
-                cout<<sss<<endl;
-                cout<<str<<endl;
-                cout<<str1<<endl;
+//                cout<<sss<<endl;
+//                getline(in,sss);
+                cout << "INPUT" << endl;
+                cout << sss << endl;
+                cout<<"Correct output"<<endl;
+                cout << str << endl;
+                cout<<"Your Output"<<endl;
+                cout << str1 << endl;
 
                 return 0;
             }

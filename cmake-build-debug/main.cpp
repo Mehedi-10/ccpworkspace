@@ -81,10 +81,81 @@ public:
                                                                                                             t)) {}
 };
 
+vector<dtype> prime;
+bitset<100000> mark;
+
+inline void sieve(dtype n) {
+    mark[0] = mark[1] = 1;
+    dtype i, j, limit = sqrt(n * 1.0) + 2;
+    prime.emplace_back(2);
+    for (i = 4; i <= n; i += 2)
+        mark[i] = 1;
+    for (i = 3; i <= n; i += 2) {
+        if (!mark[i]) {
+            prime.emplace_back(i);
+            if (i <= limit) {
+                for (j = i * i; j <= n; j += i * 2)
+                    mark[j] = 1;
+            }
+        }
+    }
+}
+
+vector<int> divs;
+map<pair<int,int>,int>memo;
+
+int dfs(int a, int b, int x) {
+
+    if(memo.find({a,b})!=memo.end())
+        return memo[{a,b}];
+
+    if (a == 1)
+        return memo[{a,b}]=0;
+    else if (abs(a - b) == 1) {
+        return memo[{a,b}]=min(a, b) - 1;
+    }
+
+    int ans = a-1;
+    for (auto &i: divs) {
+        if (x % i)
+            continue;
+        int r = a % i, rm = i - (a % i);
+        ans = min({ans, dfs((a - r) / i, (b - r) / i, x / i) + r + 1, dfs((a + rm) / i, (b + rm) / i, x / i) + rm + 1});
+    }
+
+    return memo[{a,b}]=ans;
+
+}
 
 int main() {
     ios_base::sync_with_stdio(false), cin.tie(nullptr);
+    sieve(32000);
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
+    int t;
+    cin >> t;
+    while (t--) {
+        int a, b;
+        cin >> a >> b;
+        if (a > b)
+            swap(a, b);
+        divs.clear();
+        memo.clear();
+        int c = b - a;
+        for (int i = 0; prime[i] * prime[i] <= c; ++i) {
+            if (c % prime[i] == 0) {
+                while (c % prime[i] == 0)
+                    c /= prime[i];
+                divs.emplace_back(prime[i]);
+            }
+        }
+        if (c > 1)
+            divs.emplace_back(c);
 
+        cout << min(dfs(a, b, b - a), a - 1) << endl;
+    }
 
     return 0;
 }

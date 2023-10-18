@@ -1,100 +1,67 @@
 #include <bits/stdc++.h>
-
+#define endl '\n'
+#define IOS ios::sync_with_stdio(false);
 using namespace std;
 
-#define endl '\n'
-#define dtype  long long
-#define mod 1000000007
-#define case(t, c) cout<<"Case "<<t<<":"<<c
+typedef long long ll;
+const int inf = 0x3f3f3f3f;
+ll T, a, b;
+map<pair<int, int>, int> vis;
+vector<int> v;
 
-
-template<typename T, typename U>
-std::istream &operator>>(std::istream &i, pair<T, U> &p) {
-    i >> p.first >> p.second;
-    return i;
-}
-
-template<typename T>
-std::istream &operator>>(std::istream &i, vector<T> &t) {
-    for (auto &v: t) { i >> v; }
-    return i;
-}
-
-template<typename T, typename U>
-std::ostream &operator<<(std::ostream &o, const pair<T, U> &p) {
-    o << p.x << ' ' << p.y;
-    return o;
-}
-
-template<typename T>
-std::ostream &operator<<(std::ostream &o, const vector<T> &t) {
-    if (t.empty())o << '\n';
-    for (size_t i = 0; i < t.size(); ++i) { o << t[i] << " \n"[i == t.size() - 1]; }
-    return o;
-}
-
-template<typename T> using minheap = priority_queue<T, vector<T>, greater<T>>;
-template<typename T> using maxheap = priority_queue<T, vector<T>, less<T>>;
-
-template<typename T>
-bool in(T a, T b, T c) { return a <= b && b < c; }
-
-namespace std {
-    template<typename T, typename U>
-    struct hash<pair<T, U>> {
-        hash<T> t;
-        hash<U> u;
-
-        size_t operator()(const pair<T, U> &p) const { return t(p.x) ^ (u(p.y) << 7); }
-    };
-}
-template<typename T>
-class vector2 : public vector<vector<T>> {
-public:
-    vector2() {}
-
-    vector2(size_t a, size_t b, T t = T()) : vector<vector<T>>(a, vector<T>(b, t)) {}
-};
-
-template<typename T>
-class vector3 : public vector<vector2<T>> {
-public:
-    vector3() {}
-
-    vector3(size_t a, size_t b, size_t c, T t = T()) : vector<vector2<T>>(a, vector2<T>(b, c, t)) {}
-};
-
-template<typename T>
-class vector4 : public vector<vector3<T>> {
-public:
-    vector4() {}
-
-    vector4(size_t a, size_t b, size_t c, size_t d, T t = T()) : vector<vector3<T>>(a, vector3<T>(b, c, d, t)) {}
-};
-
-template<typename T>
-class vector5 : public vector<vector4<T>> {
-public:
-    vector5() {}
-
-    vector5(size_t a, size_t b, size_t c, size_t d, size_t e, T t = T()) : vector<vector4<T>>(a, vector4<T>(b, c, d, e,
-                                                                                                            t)) {}
-};
-
-int main() {
-//    freopen("input.txt", "r", stdin);
-//    freopen("correctoutput.txt", "w", stdout);
-    ios_base::sync_with_stdio(false), cin.tie(nullptr);
-    int t, te = 0;
-    cin >> t;
-    while (t--) {
-        long long A, N, sum = 0;
-        cin>>A>>N;
-        for (int i = 1; i <= N; ++i) {
-            sum += abs(i % (A - 1) - i % A);
+ll dfs(ll a, ll b)
+{
+    pair<int, int> p;
+    p.first = a, p.second = b;
+    if (a == 1 || b == 1)
+        return vis[p] = 0;
+    if (vis.count(p))
+        return vis[p];
+    ll ans = a - 1;
+    if (b - a == 1)
+        return vis[p] = a - 1;
+    int cha = b - a;
+    for (int i = 0; i < v.size(); ++i)
+    {
+        if (cha % v[i] == 0)
+        {
+            int x = a % v[i], y = v[i] - a % v[i];
+            ans = min(ans, 1 + x + dfs((a - x) / v[i], (b - x) / v[i]));
+            ans = min(ans, 1 + y + dfs((a + y) / v[i], (b + y) / v[i]));
         }
-        cout << sum << endl;
+    }
+    vis[p] = ans;
+    return vis[p];
+}
+
+int main()
+{
+    //IOS; cin.tie(0), cout.tie(0);
+    freopen("input.txt", "r", stdin);
+    freopen("correctoutput.txt", "w", stdout);
+
+    cin >> T;
+    while (T--)
+    {
+        vis.clear(), v.clear();
+        cin >> a >> b;
+        if (b < a)
+            swap(a, b);
+        ll cha = b - a;
+        for (int i = 2; i <= sqrt(cha); ++i)
+        {
+            if (cha % i == 0)
+            {
+                v.push_back(i);
+                while (cha % i == 0)
+                    cha /= i;
+            }
+        }
+        if (cha != 1)
+            v.push_back(cha);
+        cout << dfs(a, b) << endl;
     }
 
     return 0;
 }
+
